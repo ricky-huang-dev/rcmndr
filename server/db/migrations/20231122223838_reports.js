@@ -1,6 +1,6 @@
 export async function up(knex) {
   await knex.schema.createTable('reports', (table) => {
-    table.string('id').primary()
+    table.increments('id').primary()
     table.timestamp('created_on')
     table.string('reported_by')
     table.integer('reason_id')
