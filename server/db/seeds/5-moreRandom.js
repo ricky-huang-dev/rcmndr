@@ -6,6 +6,7 @@ export async function seed(knex) {
   await insertFollowers(knex)
   await insertSongs(knex)
   await insertNotifications(knex)
+  await insertReport(knex)
 }
 
 async function insertNotifications(knex) {
@@ -75,4 +76,21 @@ function insertMoreUsers(knex) {
   }))
 
   return knex('users').insert(users)
+}
+
+async function insertReport(knex) {
+  const userIds = await knex('users').pluck('auth0_id')
+  const reasonsId = await knex('reasons').pluck('id')
+  const songsId = await knex('songs').pluck('id')
+
+  const reports = Array.from({ length: 5 }).map((_, i) => ({
+    created_on: faker.date.past(),
+    reported_by: faker.helpers.arrayElement(userIds),
+    reason_id: faker.helpers.arrayElement(reasonsId),
+    is_processed: faker.number.int({ min: 0, max: 1 }),
+    song_id: faker.helpers.arrayElement(songsId),
+    moderator_id: faker.helpers.arrayElement(userIds),
+  }))
+
+  await knex('reports').insert(reports)
 }
