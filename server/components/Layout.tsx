@@ -13,11 +13,12 @@ function Layout({ children }: Props) {
           crossOrigin="anonymous"
         ></script>
       </head>
-      <body hx-boost="true">
+      <body hx-boost="false">
         <header>
           <a href="/logout">Logout</a>
           <a href="/login">Login</a>
         </header>
+
         <main>{children}</main>
       </body>
     </html>
