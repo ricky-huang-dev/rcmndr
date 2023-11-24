@@ -22,36 +22,34 @@ router.get('/home', (_, res) => {
 function getReports(reports: any) {
   return (
     <>
-      <ul>
-        {reports.map((report: any) => (
-          <table key={report.id}>
-            <tr key={report.id}>
-              <td>
-                User: {report.first_name} {report.last_name}
-              </td>
-            </tr>
-            <br />
-            <tr key={report.id}>
-              <td>
-                Creation Date:{' '}
-                {moment(report.created_on).format('MM/DD/YY HH:MM')}
-              </td>
-            </tr>
-            <br />
-            <tr key={report.id}>
-              <td>
-                Song: {report.title}
-                Artist: {report.artist}
-              </td>
-            </tr>
-            <br />
-            <tr key={report.id}>
-              <td>Reason: {report.reason}</td>
-            </tr>
-            <br />
-          </table>
-        ))}
-      </ul>
+      {reports.map((report: any) => (
+        <table className="grid  grid-cols-1" key={report.id}>
+          <tr key={report.id}>
+            <td>
+              User: {report.first_name} {report.last_name}
+            </td>
+          </tr>
+          <tr key={report.id}>
+            <td>
+              Creation Date:{' '}
+              {moment(report.created_on).format('MM/DD/YY HH:MM')}
+            </td>
+          </tr>
+
+          <tr key={report.id}>
+            <td>
+              Song: {report.title}
+              Artist: {report.artist}
+            </td>
+          </tr>
+
+          <tr key={report.id}>
+            <td>Reason: {report.reason}</td>
+          </tr>
+          <br />
+          <br />
+        </table>
+      ))}
     </>
   )
 }
@@ -67,10 +65,11 @@ router.get(
       renderToStaticMarkup(
         <Layout>
           <main>
-            Unprocessed: {getReports(unprocessedReports)}
-            <br />
-            <br />
-            Processed: {getReports(processedReports)}
+            <ul>
+              Unprocessed: {getReports(unprocessedReports)}
+              <br />
+              Processed: {getReports(processedReports)}
+            </ul>
           </main>
         </Layout>
       )
