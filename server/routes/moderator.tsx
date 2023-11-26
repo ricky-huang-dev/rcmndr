@@ -23,7 +23,7 @@ function getReports(reports: any) {
   return (
     <>
       {reports.map((report: any) => (
-        <table className="grid  grid-cols-1" key={report.id}>
+        <table key={report.id}>
           <tr key={report.id}>
             <td>
               User: {report.first_name} {report.last_name}
@@ -37,10 +37,10 @@ function getReports(reports: any) {
           </tr>
 
           <tr key={report.id}>
-            <td>
-              Song: {report.title}
-              Artist: {report.artist}
-            </td>
+            <td>Song: {report.title}</td>
+          </tr>
+          <tr>
+            <td>Artist: {report.artist}</td>
           </tr>
 
           <tr key={report.id}>

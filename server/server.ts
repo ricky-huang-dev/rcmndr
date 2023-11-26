@@ -30,11 +30,11 @@ server.get('/login', (_, res) => {
 
 // auth0 middleware calls this route when moderators logout
 server.get('/logout', (_, res) => {
-  res.oidc.logout({ returnTo: '/moderators/home' })
+  res.oidc.logout({ returnTo: '/moderator/home' })
 })
 
+server.use(express.static(Path.resolve('public')))
 if (process.env.NODE_ENV === 'production') {
-  server.use(express.static(Path.resolve('public')))
   server.use('/', express.static(Path.resolve('./dist/assets')))
   server.get('*', (_, res) => {
     res.sendFile(Path.resolve('./dist/assets/index.html'))

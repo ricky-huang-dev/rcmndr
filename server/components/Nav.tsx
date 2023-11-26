@@ -12,7 +12,7 @@ function Nav(props: Props) {
   function handleLogin() {
     loginWithRedirect({
       authorizationParams: {
-        redirect_uri: `${window.location.origin}/my-songs`,
+        redirect_uri: `${window.location.origin}`,
       },
     })
   }
@@ -29,15 +29,6 @@ function Nav(props: Props) {
   return (
     <nav className="pt-16 pl-4 flex">
       <ul className="text-3xl">
-        <li>
-          <button onClick={() => goTo('/my-songs')}>My songs</button>
-        </li>
-        <li>
-          <button onClick={() => goTo('/my-friends')}>My friends</button>
-        </li>
-        <li>
-          <button onClick={() => goTo('/profile')}>Edit Profile</button>
-        </li>
         <li>
           <button onClick={() => goTo('/scan')}>Scan QR code</button>
         </li>
