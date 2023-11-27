@@ -8,6 +8,7 @@ export async function seed(knex) {
       title: 'Hengelo',
       artist: 'Spring Offensive',
       link: 'https://open.spotify.com/track/4rqpg85XNApASjAvqjHlb1?si=2bdc00343f3e47f2',
+      comments: 'this song is so great',
     },
     {
       id: 2,

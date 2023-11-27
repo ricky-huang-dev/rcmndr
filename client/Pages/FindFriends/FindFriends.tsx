@@ -1,7 +1,9 @@
 import Button from '../../components/UI/Button/Button'
 import TextBox from '../../components/UI/TextBox/TextBox'
+import useUpdateTitle from '../../hooks/useUpdateTitle'
 
 function FindFriends() {
+  useUpdateTitle('FindFriends')
   return (
     <div className="p-4 mt-10 space-y-10">
       <div className="space-y-2">

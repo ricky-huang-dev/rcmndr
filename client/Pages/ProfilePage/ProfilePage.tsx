@@ -3,8 +3,10 @@ import { useAuth0 } from '@auth0/auth0-react'
 import ProfileForm from '../../components/ProfileForm/ProfileForm'
 import { Profile, ProfileDraft } from '../../../types/Profile'
 import useProfile from '../../hooks/useProfile'
+import useUpdateTitle from '../../hooks/useUpdateTitle'
 
 function ProfilePage() {
+  useUpdateTitle('Profile')
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0()
 
   const { data, isLoading, mutation } = useProfile()

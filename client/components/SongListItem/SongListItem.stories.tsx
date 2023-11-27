@@ -24,6 +24,7 @@ export const songListItem: Story = {
   render: () => (
     <Background>
       <SongListItem
+        handlePlaySong={() => {}}
         handleEditSong={() => {}}
         handleDeleteSong={() => {}}
         song={song}

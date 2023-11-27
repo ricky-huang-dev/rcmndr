@@ -1,4 +1,7 @@
+import useUpdateTitle from '../../hooks/useUpdateTitle'
+
 function MyFriends() {
+  useUpdateTitle('MyFriends')
   const data = [{ id: 1, nickname: 'First user' }]
 
   return (

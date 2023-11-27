@@ -1,7 +1,9 @@
 import LoginButton from '../../components/Login/Login'
 import RegisterButton from '../../components/RegisterButton/RegisterButton'
+import useUpdateTitle from '../../hooks/useUpdateTitle'
 
 function Home() {
+  useUpdateTitle('Home')
   return (
     <div className="pt-44 pl-4 flex flex-col gap-4">
       <div>
