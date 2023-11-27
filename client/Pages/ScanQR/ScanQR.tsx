@@ -8,16 +8,15 @@ function ScanQR() {
       <QrReader
         onResult={(result, error) => {
           if (result) {
-            navigate(`/confirm-scan/${result.text}`)
+            navigate(`/confirm-scan/${result.getText()}`)
           }
 
           if (error) {
             console.info(error)
           }
         }}
-        style={{ width: '100%' }}
+        constraints={{ facingMode: 'user' }}
       />
-      <p></p>
     </>
   )
 }
