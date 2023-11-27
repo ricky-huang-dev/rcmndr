@@ -22,6 +22,15 @@ export async function getUser(token: string) {
   return res.body as Profile
 }
 
+export async function getUserByAuth0Id(token: string, otherUserId: string) {
+  const res = await request
+    .get(`/api/v1/users/${otherUserId}`)
+    .set('Authorization', `Bearer ${token}`)
+    .set('Content-Type', 'application/json')
+
+  return res.body as Profile
+}
+
 export async function followUser(auth0: string, token: string) {
   const res = await request
     .post(`/api/v1/users/${auth0}/follow`)
