@@ -66,6 +66,39 @@ describe('GET /api/v1/users', () => {
   })
 })
 
+describe('GET /api/v1/users/fakeAuth0', () => {
+  it('should return 200 with a user', async () => {
+    const fakeUser: Profile = {
+      auth0Id: '123',
+      nickname: 'banana',
+      firstName: 'Ripe',
+      lastName: 'Banana',
+      public: true,
+    }
+
+    vi.mocked(db.getUser).mockResolvedValue(fakeUser)
+    const response = await request(server)
+      .get('/api/v1/users/fakeAuth0')
+      .set('authorization', `Bearer ${getMockToken()}`)
+    expect(response.status).toBe(200)
+    expect(response.body).toEqual(fakeUser)
+  })
+
+  it('should return 401 when no access token is passed', async () => {
+    vi.mocked(db.getUser).mockRejectedValue(new Error('test'))
+    const response = await request(server).get('/api/v1/users/fakeAuth0')
+    expect(response.status).toBe(401)
+  })
+
+  it('should return 404 when no user is found', async () => {
+    vi.mocked(db.getUser).mockResolvedValue(null)
+    const response = await request(server)
+      .get('/api/v1/users/fakeAuth0')
+      .set('authorization', `Bearer ${getMockToken()}`)
+    expect(response.status).toBe(404)
+  })
+})
+
 describe('POST /api/v1/users', () => {
   it('should return 201 when creating a new profile', async () => {
     const fakeProfile: Profile = {

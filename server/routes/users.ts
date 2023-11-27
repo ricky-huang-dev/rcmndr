@@ -89,16 +89,16 @@ router.get('/:auth0Id', validateAccessToken, async (req, res) => {
   const auth0Id = req.params.auth0Id
 
   if (!auth0Id) {
-    res.status(400).json({ message: 'Please provide an auth0Id' })
+    return res.status(400).json({ message: 'Please provide an auth0Id' })
   }
 
   const user = await db.getUser(auth0Id)
 
   if (!user) {
-    res.status(400).json({ message: 'User not found' })
+    return res.status(404).json({ message: 'User not found' })
   }
 
-  res.status(200).json(user)
+  return res.status(200).json(user)
 })
 
 // POST /api/v1/users/:userId/follow
