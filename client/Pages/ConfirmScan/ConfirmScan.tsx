@@ -1,5 +1,9 @@
+import { useParams } from 'react-router-dom'
+
 function ConfirmScan() {
-  return <div>Hello</div>
+  const { code } = useParams()
+
+  return <div>{code}</div>
 }
 
 export default ConfirmScan
