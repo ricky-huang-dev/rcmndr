@@ -11,11 +11,7 @@ function Layout({ children, title }: Props) {
     <html lang="en">
       <head>
         <link rel="stylesheet" href="../../main.css" />
-        <script
-          src="https://unpkg.com/htmx.org@1.9.9"
-          integrity="sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX"
-          crossOrigin="anonymous"
-        ></script>
+        <script src="/htmx.js"></script>
         <script
           src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"
           integrity="sha512-rpLlll167T5LJHwp0waJCh3ZRf7pO6IT1+LZOhAyP6phAirwchClbTZV3iqL3BMrVxIYRbzGTpli4rfxsCK6Vw=="
@@ -31,7 +27,7 @@ function Layout({ children, title }: Props) {
           href="/favicon-16x16.png"
         />
       </head>
-      <body hx-boost="false" className="bg-darkPurple h-screen text-white">
+      <body hx-boost="true" className="bg-darkPurple h-screen text-white">
         <header className="flex justify-between items-center">
           <Rcmndr />
 
