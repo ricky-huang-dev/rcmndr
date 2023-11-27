@@ -1,5 +1,6 @@
 import { QrReader } from 'react-qr-reader'
 import { useNavigate } from 'react-router-dom'
+import { logError } from '../../../server/logger'
 
 function ScanQR() {
   const navigate = useNavigate()
@@ -12,7 +13,7 @@ function ScanQR() {
           }
 
           if (error) {
-            console.info(error)
+            logError(error)
           }
         }}
         constraints={{ facingMode: 'user' }}
