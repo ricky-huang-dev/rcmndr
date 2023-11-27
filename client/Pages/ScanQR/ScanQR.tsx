@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import { QrReader } from 'react-qr-reader'
+import { useNavigate } from 'react-router-dom'
+import { as } from 'vitest/dist/reporters-5f784f42.js'
 
 function ScanQR() {
-  const [data, setData] = useState('No result')
+  const navigate = useNavigate()
   return (
     <>
       <QrReader
         onResult={(result, error) => {
-          console.log(result)
           if (result) {
-            setData(result?.text)
+            navigate(`/confirm-scan/${result.text}`)
           }
 
           if (error) {
@@ -18,7 +19,7 @@ function ScanQR() {
         }}
         style={{ width: '100%' }}
       />
-      <p>{data}</p>
+      <p></p>
     </>
   )
 }
