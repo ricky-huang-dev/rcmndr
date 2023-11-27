@@ -1,58 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import express from 'express'
 import { renderToStaticMarkup } from 'react-dom/server'
-import moment from 'moment'
 
 import Layout from '../components/Layout'
 import * as auth from '../auth0'
-import { getProcessedReports, getUnprocessedReports } from '../db/moderator'
+import {
+  getProcessedReports,
+  getSingleReport,
+  getUnprocessedReports,
+  updateReport,
+} from '../db/moderator'
+import SongListItem from '../components/SongListItem'
+import SingleReportDetails from '../components/SingleReportDetails'
 
 const router = express.Router()
 
 router.get('/home', (_, res) => {
   res.send(
     renderToStaticMarkup(
-      <Layout>
+      <Layout title="">
         <main>This is the landing page for unsigned admins</main>
       </Layout>
     )
   )
 })
-
-function getReports(reports: any) {
-  return (
-    <>
-      {reports.map((report: any) => (
-        <table key={report.id}>
-          <tr key={report.id}>
-            <td>
-              User: {report.first_name} {report.last_name}
-            </td>
-          </tr>
-          <tr key={report.id}>
-            <td>
-              Creation Date:{' '}
-              {moment(report.created_on).format('MM/DD/YY HH:MM')}
-            </td>
-          </tr>
-
-          <tr key={report.id}>
-            <td>Song: {report.title}</td>
-          </tr>
-          <tr>
-            <td>Artist: {report.artist}</td>
-          </tr>
-
-          <tr key={report.id}>
-            <td>Reason: {report.reason}</td>
-          </tr>
-          <br />
-          <br />
-        </table>
-      ))}
-    </>
-  )
-}
 
 router.get(
   '/dashboard',
@@ -63,12 +34,12 @@ router.get(
 
     res.send(
       renderToStaticMarkup(
-        <Layout>
+        <Layout title="All Reported Songs">
           <main>
             <ul>
-              Unprocessed: {getReports(unprocessedReports)}
+              Unprocessed: <SongListItem song={unprocessedReports} />
               <br />
-              Processed: {getReports(processedReports)}
+              Processed: <SongListItem song={processedReports} />
             </ul>
           </main>
         </Layout>
@@ -77,4 +48,26 @@ router.get(
   }
 )
 
+router.get('/reports/:id', async (req, res) => {
+  const id = +req.params.id
+  const singleReport = await getSingleReport(id)
+
+  res.send(
+    renderToStaticMarkup(
+      <Layout title="Report Details">
+        <main>
+          <SingleReportDetails key={id} song={singleReport} />
+        </main>
+      </Layout>
+    )
+  )
+})
+
+router.post('/reports/:id', async (req, res) => {
+  const report_id = +req.params.id
+  console.log(report_id)
+  await updateReport(report_id)
+
+  res.redirect('/moderator/dashboard')
+})
 export default router
