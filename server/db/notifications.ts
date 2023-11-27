@@ -4,7 +4,7 @@ import { Notification } from '../../types/Notifications'
 export async function getNotifications(userId: string) {
   return (await db('notifications')
     .join('users', 'notifications.friend_id', 'users.auth0_id')
-    .where('notifications.user_id', userId)
+    .where('notifications.friend_id', userId)
     .andWhere('is_read', false)
     .orderBy('timestamp', 'desc')
     .select(
