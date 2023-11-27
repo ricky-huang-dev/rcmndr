@@ -3,11 +3,22 @@ import SongListItem from '../../components/SongListItem/SongListItem'
 import { getSongs } from '../../apis/songs'
 import { useAuth0 } from '@auth0/auth0-react'
 import useUpdateTitle from '../../hooks/useUpdateTitle'
-import { useState } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { useState } from 'react'
+
+interface Props {
+  id: string
+  user_id: '2334554565'
+  genre: 'Synthwave'
+  title: 'Escape From Midwich Valley'
+  artist: 'Carpenter Brut'
+  link: 'https://open.spotify.com/track/1jBP9dV1MJhVcNh75yCT6I?si=6a89028c425949d3'
+}
 
 function MySongs() {
   useUpdateTitle('MySongs')
+  const [songs, setSongs] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const newSong = [
     {
@@ -36,7 +47,7 @@ function MySongs() {
     },
   ]
 
-  const [songs, setSongs] = useState(newSong)
+  setSongs(newSong)
 
   // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0()
 
