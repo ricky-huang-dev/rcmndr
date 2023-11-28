@@ -20,6 +20,7 @@ export default defineConfig({
       manifest: {
         name: 'rcmndr.',
         short_name: 'rcmndr.',
+        description: 'rcmndr. collate. recommend. discover',
         start_url: '/',
         orientation: 'portrait',
         display: 'standalone',
@@ -33,6 +34,18 @@ export default defineConfig({
             purpose: 'maskable',
           },
           {
+            src: '/favicon-32x32.png',
+            sizes: '32x32',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+          {
+            src: '/favicon-144x144.png',
+            sizes: '144x144',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
             src: '/android-chrome-192x192.png',
             sizes: '192x192',
             type: 'image/png',
@@ -44,28 +57,16 @@ export default defineConfig({
             type: 'image/png',
             purpose: 'maskable',
           },
-          {
-            src: '/favicon-144x144.png',
-            sizes: '144x144',
-            type: 'image/png',
-            purpose: 'any maskable',
-          },
-          {
-            src: '/favicon-32x32.png',
-            sizes: '32x32',
-            type: 'image/png',
-            purpose: 'maskable',
-          },
         ],
-        screenshots: [
-          {
-            src: '/screenshot-rcmndr.png',
-            sizes: '640x320',
-            type: 'image/png',
-            form_factor: 'wide',
-            label: 'still rcmndr',
-          },
-        ],
+        // screenshots: [
+        //   {
+        //     src: '/ss-rcmndr.png',
+        //     sizes: '640x320',
+        //     type: 'image/png',
+        //     form_factor: 'wide',
+        //     label: 'still rcmndr',
+        //   },
+        // ],
       },
     }),
   ],
