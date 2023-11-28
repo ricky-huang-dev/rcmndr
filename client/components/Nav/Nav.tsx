@@ -30,6 +30,9 @@ function Nav(props: Props) {
     <nav className="pt-16 pl-4 flex">
       <ul className="text-3xl">
         <li>
+          <button onClick={() => goTo('/notifications')}>Notifications</button>
+        </li>
+        <li>
           <button onClick={() => goTo('/my-songs')}>My songs</button>
         </li>
         <li>

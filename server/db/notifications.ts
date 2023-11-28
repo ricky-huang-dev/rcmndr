@@ -2,6 +2,7 @@ import db from './connection'
 import { Notification } from '../../types/Notifications'
 
 export async function getNotifications(userId: string) {
+  userId = 'auth0|6478f3fd75374ee3d7bc4d94'
   return (await db('notifications')
     .join('users', 'notifications.friend_id', 'users.auth0_id')
     .where('notifications.friend_id', userId)
