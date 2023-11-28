@@ -6,7 +6,7 @@ export async function up(knex) {
     table.integer('reason_id').references('reasons.id')
     table.boolean('is_processed').defaultTo(false)
     table.integer('song_id').references('songs.id')
-    table.integer('moderator_id').references('users.auth0_id')
+    table.string('moderator_id').references('users.auth0_id')
   })
 }
 

@@ -12,7 +12,7 @@ function Nav(props: Props) {
   function handleLogin() {
     loginWithRedirect({
       authorizationParams: {
-        redirect_uri: `${window.location.origin}/my-songs`,
+        redirect_uri: `${window.location.origin}/my-friends`,
       },
     })
   }

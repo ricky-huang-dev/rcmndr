@@ -8,7 +8,8 @@ export async function seed(knex) {
       title: 'Hengelo',
       artist: 'Spring Offensive',
       link: 'https://open.spotify.com/track/4rqpg85XNApASjAvqjHlb1?si=2bdc00343f3e47f2',
-      comments: 'this song is so great',
+      comments: 'this song is so great', // FUTURE TODO: change to description (see schema for songs table)
+      is_banned: false,
     },
     {
       id: 2,
@@ -17,6 +18,7 @@ export async function seed(knex) {
       title: 'By Design',
       artist: 'Tigercub',
       link: 'https://open.spotify.com/track/6ICdz2wvVMDC4u801OwHA2?si=8e214d39012c4685',
+      is_banned: false,
     },
     {
       id: 3,
@@ -25,6 +27,7 @@ export async function seed(knex) {
       title: 'Computers',
       artist: 'Clown Core',
       link: 'https://open.spotify.com/track/6izX4jKOXNfHHIsOL7YkzF?si=c03b5e5889374a62',
+      is_banned: false,
     },
     {
       id: 4,
@@ -33,6 +36,7 @@ export async function seed(knex) {
       title: 'I look to you (feat. Kimbra)',
       artist: 'Miami Horror',
       link: 'https://open.spotify.com/track/0L0GeZL4lyx34nYDzsNuG4?si=a89fdafe24d74899',
+      is_banned: false,
     },
     {
       id: 5,
@@ -41,6 +45,7 @@ export async function seed(knex) {
       title: 'I WIll Be Okay Everything',
       artist: 'The World Is A Beautiful Place & I Am No Longer Afraid To Die',
       link: 'https://open.spotify.com/track/6OGIl9BPa2H6UVyC0FxHM5?si=c07d49a7c1e54371',
+      is_banned: false,
     },
     {
       id: 6,
@@ -49,6 +54,7 @@ export async function seed(knex) {
       title: "You Know That Aint Them Dogs' Real Voices",
       artist: 'iwrestledabearonce',
       link: 'https://open.spotify.com/track/0NWxL0fO7j8pUSgKncipY6?si=8ed18a0ed3894793',
+      is_banned: false,
     },
     {
       id: 7,
@@ -57,6 +63,7 @@ export async function seed(knex) {
       title: 'Rule The Beast',
       artist: 'Torche',
       link: 'https://open.spotify.com/track/0RzryWDVHhsziHkXsT2HqV?si=b42fc552b8ff497d',
+      is_banned: false,
     },
     {
       id: 8,
@@ -65,6 +72,7 @@ export async function seed(knex) {
       title: 'From Liquid',
       artist: 'Mr Kitty',
       link: 'https://open.spotify.com/track/4jQdD7SuEB9evpBL3brmbC?si=276ce37528b94b81',
+      is_banned: false,
     },
     {
       id: 9,
@@ -73,6 +81,7 @@ export async function seed(knex) {
       title: 'Cat Fantastic',
       artist: 'TTNG',
       link: 'https://open.spotify.com/track/1kaWnMc0ryiFtPwWVKmZtb?si=aea1f12a4bdc4eef',
+      is_banned: false,
     },
     {
       id: 10,
@@ -81,6 +90,7 @@ export async function seed(knex) {
       title: 'Mr Milk',
       artist: 'You Am I',
       link: 'https://open.spotify.com/track/5lrL2UjiCeBICSuvNattnn?si=3c177b2ce721438a',
+      is_banned: false,
     },
     {
       id: 11,
@@ -89,6 +99,7 @@ export async function seed(knex) {
       title: 'Clairvoyant',
       artist: 'BRNS',
       link: 'https://open.spotify.com/track/0XDxLlLqhuqsig4cat7aa1?si=08132d96cdae4436',
+      is_banned: false,
     },
     {
       id: 12,
@@ -97,6 +108,7 @@ export async function seed(knex) {
       title: 'Dark All Day',
       artist: 'Gunship',
       link: 'https://open.spotify.com/track/4GBJomKlZNRnODfpL299pw?si=6dc5f4da63e74507',
+      is_banned: false,
     },
     {
       id: 13,
@@ -105,6 +117,7 @@ export async function seed(knex) {
       title: 'From Liquid',
       artist: 'Mr Kitty',
       link: 'https://open.spotify.com/track/4jQdD7SuEB9evpBL3brmbC?si=276ce37528b94b81',
+      is_banned: false,
     },
     {
       id: 14,
@@ -113,6 +126,7 @@ export async function seed(knex) {
       title: 'Escape From Midwich Valley',
       artist: 'Carpenter Brut',
       link: 'https://open.spotify.com/track/1jBP9dV1MJhVcNh75yCT6I?si=6a89028c425949d3',
+      is_banned: false,
     },
   ])
 }

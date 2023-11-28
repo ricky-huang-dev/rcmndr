@@ -12,14 +12,12 @@ import {
 } from '@tanstack/react-query'
 import { Auth0Provider } from '@auth0/auth0-react'
 import { toast } from 'react-hot-toast'
+import { Suspense } from 'react'
+import { lazy } from 'react'
 
 import AppLayout from './components/AppLayout/AppLayout'
 import ProtectedComponent from './components/UI/ProtectedComponent'
-//import Home from './Pages/Home/Home'
-
-import { Suspense } from 'react'
 import Loading from './components/Loading/Loading'
-import { lazy } from 'react'
 import ErrorPage from './Pages/ErrorPage/ErrorPage'
 
 const Home = lazy(() => import('./Pages/Home/Home'))
@@ -29,6 +27,8 @@ const ProfilePage = lazy(() => import('./Pages/ProfilePage/ProfilePage'))
 const MySongs = lazy(() => import('./Pages/MySongs/MySongs'))
 const ScanQR = lazy(() => import('./Pages/ScanQR/ScanQR'))
 const ConfirmScan = lazy(() => import('./Pages/ConfirmScan/ConfirmScan'))
+const AddSong = lazy(() => import('./Pages/AddSong/Songs'))
+
 export const routes = createRoutesFromElements(
   <Route path="/" element={<AppLayout />} errorElement={<ErrorPage />}>
     <Route
@@ -51,7 +51,6 @@ export const routes = createRoutesFromElements(
       path="my-friends"
       element={
         <Suspense fallback={<Loading />}>
-          {' '}
           <ProtectedComponent component={MyFriends} />
         </Suspense>
       }
@@ -88,6 +87,14 @@ export const routes = createRoutesFromElements(
         </Suspense>
       }
     />
+    <Route
+      path="add-song"
+      element={
+        <Suspense fallback={<Loading />}>
+          <ProtectedComponent component={AddSong} />
+        </Suspense>
+      }
+    />
   </Route>
 )
 
@@ -119,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         audience: import.meta.env.VITE_AUTH0_AUDIENCE as string,
-        redirect_uri: window.location.origin,
+        redirect_uri: `${window.location.origin}/my-friends`,
       }}
     >
       <QueryClientProvider client={queryClient}>

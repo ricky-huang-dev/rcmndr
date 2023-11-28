@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, beforeEach } from 'vitest'
 import db from './connection'
-import { getFriends, searchFriends } from './users'
+import { getFriends, searchFriends, unfollowFriend } from './users'
 
 beforeAll(async () => {
   await db.migrate.latest()
@@ -29,5 +29,17 @@ describe('searchFriends', () => {
   it('non added friends should be suggested', async () => {
     const friends = await searchFriends('auth0|6478f3fd75374ee3d7bc4d94', 'boi')
     expect(friends).toHaveLength(1)
+  })
+})
+
+describe('unfollowFriend', () => {
+  it('should delete record in the following_list table', async () => {
+    const user = 'auth0|6478f3fd75374ee3d7bc4d94'
+    const friend = 'auth0|648fd1c873375442becf2c60'
+    
+    await unfollowFriend(user, friend)
+    const friends = await getFriends(user)
+    expect(friends).toHaveLength(2)
+    
   })
 })

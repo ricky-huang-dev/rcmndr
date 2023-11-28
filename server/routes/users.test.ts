@@ -14,7 +14,9 @@ describe('GET /api/v1/users/friends', () => {
       {
         id: '123',
         nickname: 'banana',
-        firstName: 'Banana',
+        firstName: 'Linda',
+        lastName: 'Stevenson',
+        public: true,
       },
     ]
 
@@ -163,5 +165,51 @@ describe('POST /api/v1/users', () => {
     expect(response.body).toEqual({
       message: 'Unable to insert new user to database',
     })
+  })
+})
+
+describe('GET /api/v1/users/search?q=banana', () => {
+  it('should return 200 with an array', async () => {
+    const fakeFriends = [
+      {
+        id: '123',
+        nickname: 'banana',
+        firstName: 'Linda',
+        lastName: 'Stevenson',
+      },
+    ]
+
+    vi.mocked(db.searchFriends).mockResolvedValue(fakeFriends)
+    const response = await request(server)
+      .get('/api/v1/users/search?q=banana')
+      .set('authorization', `Bearer ${getMockToken()}`)
+    expect(response.status).toBe(200)
+    expect(response.body).toEqual(fakeFriends)
+  })
+
+  it('should return 500 when no access token is passed', async () => {
+    vi.mocked(db.searchFriends).mockRejectedValue(new Error('test'))
+    const response = await request(server)
+      .get('/api/v1/users/search?q=banana')
+      .set('authorization', `Bearer ${getMockToken()}`)
+    expect(response.status).toBe(500)
+    expect(response.body).toEqual({ message: 'Unable to retrieve friends' })
+  })
+})
+
+describe('POST /api/v1/users/:userId/follow', () => {
+  it('should accept an object returns 201', async () => {
+    vi.mocked(db.followFriends).mockResolvedValue()
+    const res = await request(server)
+      .post('/api/v1/users/123/follow')
+      .send({
+        id: '123',
+        nickname: 'banana',
+        firstName: 'Linda',
+        lastName: 'Stevenson',
+      })
+      .set('authorization', `Bearer ${getMockToken()}`)
+
+    expect(res.status).toBe(201)
   })
 })

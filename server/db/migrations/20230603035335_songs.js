@@ -6,7 +6,7 @@ export async function up(knex) {
     table.string('artist').notNullable()
     table.string('genre')
     table.string('link')
-    table.string('comments')
+    table.string('comments') // change this to description in future versions - this references the user's opinion of the song
     table.boolean('is_banned').defaultTo(false)
   })
 }
