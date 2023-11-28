@@ -1,12 +1,47 @@
 import Rcmndr from './Rcmndr'
 
 /* eslint-disable react/no-unknown-property */
+
 interface Props {
   title: string
   children: React.ReactNode
 }
 
-function Layout({ children, title }: Props) {
+interface LayoutProps extends Props {
+  AuthenicationControl: React.ReactNode
+}
+
+export function LayoutLoggedIn({ children, title }: Props) {
+  return (
+    <Layout
+      title={title}
+      AuthenicationControl={
+        <a className="mr-4" href="/logout" hx-boost="false">
+          Logout
+        </a>
+      }
+    >
+      {children}
+    </Layout>
+  )
+}
+
+export function LayoutLoggedOut({ children, title }: Props) {
+  return (
+    <Layout
+      title={title}
+      AuthenicationControl={
+        <a className="ml-4" href="/login" hx-boost="false">
+          Login
+        </a>
+      }
+    >
+      {children}
+    </Layout>
+  )
+}
+
+function Layout({ AuthenicationControl, children, title }: LayoutProps) {
   return (
     <html lang="en">
       <head>
@@ -26,20 +61,13 @@ function Layout({ children, title }: Props) {
           sizes="16x16"
           href="/favicon-16x16.png"
         />
+        <title>{title}</title>
       </head>
       <body hx-boost="true" className="bg-darkPurple h-screen text-white">
         <header className="flex justify-between items-center">
           <Rcmndr />
 
-          <div className="flex items-center">
-            <a className="mr-4" href="/logout" hx-boost="false">
-              Logout
-            </a>
-
-            <a className="ml-4" href="/login" hx-boost="false">
-              Login
-            </a>
-          </div>
+          <div className="flex items-center">{AuthenicationControl}</div>
         </header>
         <h1 className=" tx-2xl font-bold">{title}</h1>
 
@@ -48,5 +76,3 @@ function Layout({ children, title }: Props) {
     </html>
   )
 }
-
-export default Layout

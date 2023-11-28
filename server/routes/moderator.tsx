@@ -2,7 +2,7 @@
 import express from 'express'
 import { renderToStaticMarkup } from 'react-dom/server'
 
-import Layout from '../components/Layout'
+import { LayoutLoggedOut, LayoutLoggedIn } from '../components/Layout'
 import * as auth from '../auth0'
 import {
   getProcessedReports,
@@ -19,9 +19,9 @@ const router = express.Router()
 router.get('/home', (_, res) => {
   res.send(
     renderToStaticMarkup(
-      <Layout title="">
+      <LayoutLoggedOut title="Home">
         <main>This is the landing page for unsigned admins</main>
-      </Layout>
+      </LayoutLoggedOut>
     )
   )
 })
@@ -35,7 +35,7 @@ router.get(
 
     res.send(
       renderToStaticMarkup(
-        <Layout title="All Reported Songs">
+        <LayoutLoggedIn title="All Reported Songs">
           <main>
             <ul>
               Unprocessed: <SongListItem song={unprocessedReports} />
@@ -43,7 +43,7 @@ router.get(
               Processed: <SongListItem song={processedReports} />
             </ul>
           </main>
-        </Layout>
+        </LayoutLoggedIn>
       )
     )
   }
@@ -59,11 +59,11 @@ router.get(
 
     res.send(
       renderToStaticMarkup(
-        <Layout title="Report Details">
+        <LayoutLoggedIn title="Report Details">
           <main>
             <SingleReportDetails key={id} song={singleReport} />
           </main>
-        </Layout>
+        </LayoutLoggedIn>
       )
     )
   }
