@@ -25,7 +25,7 @@ function MyNotification() {
               <div className="flex flex-col w-36 flex-auto">
                 <h3 className="text-white">{notification.message}</h3>
                 <h4 className="text-xs text-lightPurple">
-                  {notification.nickname}
+                  {notification.firstName}
                 </h4>
               </div>
             </li>
