@@ -32,11 +32,11 @@ function Layout({ children, title }: Props) {
           <Rcmndr />
 
           <div className="flex items-center">
-            <a className="mr-4" href="/logout">
+            <a className="mr-4" href="/logout" hx-boost="false">
               Logout
             </a>
 
-            <a className="ml-4" href="/login">
+            <a className="ml-4" href="/login" hx-boost="false">
               Login
             </a>
           </div>

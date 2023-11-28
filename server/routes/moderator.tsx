@@ -8,6 +8,7 @@ import {
   getProcessedReports,
   getSingleReport,
   getUnprocessedReports,
+  updateBanStatus,
   updateReport,
 } from '../db/moderator'
 import SongListItem from '../components/SongListItem'
@@ -48,26 +49,59 @@ router.get(
   }
 )
 
-router.get('/reports/:id', async (req, res) => {
-  const id = +req.params.id
-  const singleReport = await getSingleReport(id)
+router.get(
+  '/reports/:id',
+  auth.requiresPermission('moderate:songs'),
+  async (req, res) => {
+    // req.oidc.accessToken ? 'loggedin' : 'not logged'
+    const id = +req.params.id
+    const singleReport = await getSingleReport(id)
 
-  res.send(
-    renderToStaticMarkup(
-      <Layout title="Report Details">
-        <main>
-          <SingleReportDetails key={id} song={singleReport} />
-        </main>
-      </Layout>
+    res.send(
+      renderToStaticMarkup(
+        <Layout title="Report Details">
+          <main>
+            <SingleReportDetails key={id} song={singleReport} />
+          </main>
+        </Layout>
+      )
     )
-  )
-})
+  }
+)
 
-router.post('/reports/:id', async (req, res) => {
-  const report_id = +req.params.id
-  console.log(report_id)
-  await updateReport(report_id)
+router.patch(
+  '/reports/:id',
+  auth.requiresPermission('moderate:songs'),
+  async (req, res) => {
+    try {
+      const report_id = +req.params.id
+      console.log(report_id)
+      await updateReport(report_id)
 
-  res.redirect('/moderator/dashboard')
-})
+      res.redirect(303, '/moderator/dashboard')
+    } catch (err) {
+      console.error(err)
+    }
+  }
+)
+
+router.patch(
+  '/banned/:id',
+  auth.requiresPermission('moderate:songs'),
+  async (req, res) => {
+    try {
+      const report_id = +req.params.id
+      const reportDetails = await getSingleReport(report_id)
+      const songId = reportDetails[0].song_id
+      console.log(reportDetails)
+      await updateReport(report_id)
+      await updateBanStatus(songId)
+
+      res.redirect(303, '/moderator/dashboard')
+    } catch (err) {
+      console.error(err)
+    }
+  }
+)
+
 export default router

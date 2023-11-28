@@ -1,6 +1,7 @@
 export async function seed(knex) {
   const users = await knex('users').select('auth0_id')
-  return knex('songs').insert([
+
+  const songs = [
     {
       id: 1,
       user_id: users[0].auth0_id,
@@ -114,5 +115,7 @@ export async function seed(knex) {
       artist: 'Carpenter Brut',
       link: 'https://open.spotify.com/track/1jBP9dV1MJhVcNh75yCT6I?si=6a89028c425949d3',
     },
-  ])
+  ].map((song) => ({ ...song, is_banned: 0 }))
+
+  return knex('songs').insert(songs)
 }

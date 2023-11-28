@@ -1,48 +1,23 @@
-import { useAuth0 } from '@auth0/auth0-react'
-import { useNavigate } from 'react-router-dom'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
-interface Props {
-  toggleMenu: () => void
-}
-
-function Nav(props: Props) {
-  const { isAuthenticated, logout, loginWithRedirect } = useAuth0()
-  const navigate = useNavigate()
-
-  function handleLogin() {
-    loginWithRedirect({
-      authorizationParams: {
-        redirect_uri: `${window.location.origin}`,
-      },
-    })
-  }
-
-  function handleLogout() {
-    logout({ logoutParams: { returnTo: window.location.origin } })
-  }
-
-  function goTo(link: string) {
-    props.toggleMenu()
-    navigate(link)
-  }
-
+export function Nav() {
   return (
-    <nav className="pt-16 pl-4 flex">
-      <ul className="text-3xl">
-        <li>
-          <button onClick={() => goTo('/scan')}>Scan QR code</button>
-        </li>
-        <li>
-          <button onClick={() => goTo('/show-qr')}>Share QR code</button>
-        </li>
-        <li>
-          {!isAuthenticated && <button onClick={handleLogin}>Log in</button>}
-        </li>
-        <li>
-          {isAuthenticated && <button onClick={handleLogout}>Log out</button>}
-        </li>
-      </ul>
-    </nav>
+    <div className="flex items-center">
+      <IfAuthenticated>
+        <a className="mr-4" href="/logout">
+          Logout
+        </a>
+      </IfAuthenticated>
+      <IfNotAuthenticated>
+        <a className="ml-4" href="/login">
+          Login
+        </a>
+      </IfNotAuthenticated>
+
+      {/* <a className="ml-4" href="/login">
+    Login
+  </a> */}
+    </div>
   )
 }
 

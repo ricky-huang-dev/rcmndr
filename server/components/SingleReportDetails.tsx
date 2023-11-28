@@ -2,7 +2,7 @@
 import moment from 'moment'
 import { Song } from '../../types/Song'
 import Icon from './Icon'
-import { updateReport } from '../db/moderator'
+
 interface Props {
   song: Song
 }
@@ -23,7 +23,7 @@ function SingleReportDetails(props: Props) {
       </tr>
       <li key={report.id} className="list-none flex gap-4">
         <div className="self-center flex-none">
-          <a href={`reports/${report.id}`}>
+          <a href={`/reports/${report.id}`}>
             <Icon>
               <i className="fa-solid fa-play text-black" />
             </Icon>
@@ -36,12 +36,12 @@ function SingleReportDetails(props: Props) {
         </div>
 
         <div className="flex flex-row gap-2 self-center flex-none">
-          <button hx-post={`/moderator/reports/${report.id}`}>
+          <button hx-patch={`/moderator/reports/${report.id}`} hx-target="body">
             <Icon>
               <i className="fa-regular fa-thumbs-up" />
             </Icon>
           </button>
-          <button>
+          <button hx-patch={`/moderator/banned/${report.id}`} hx-target="body">
             <Icon className="bg-warning">
               <i className="fa-solid fa-trash" />
             </Icon>
@@ -49,6 +49,7 @@ function SingleReportDetails(props: Props) {
         </div>
       </li>
       <p className="text-left">Reason For Report: {report.reason}</p>
+      <p>Current Status: {report.is_banned ? 'Banned' : 'Not banned'}</p>
     </div>
   ))
 }
