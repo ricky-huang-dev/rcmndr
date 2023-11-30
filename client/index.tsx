@@ -28,8 +28,6 @@ const MyFriends = lazy(() => import('./Pages/MyFriends/MyFriends'))
 const ProfilePage = lazy(() => import('./Pages/ProfilePage/ProfilePage'))
 const MySongs = lazy(() => import('./Pages/MySongs/MySongs'))
 export const routes = createRoutesFromElements(
-
-  
   <Route path="/" element={<AppLayout />} errorElement={<ErrorPage />}>
     <Route
       index
